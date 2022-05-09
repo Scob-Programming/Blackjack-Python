@@ -1,6 +1,7 @@
 
-#import itertools
+# import itertools
 import random
+
 
 # Creates Card class to store suit and value of individual cards
 class Card(object):
@@ -10,6 +11,7 @@ class Card(object):
 
     def show(self):
         print('{} of {}'.format(self.value, self.suit))
+
 
 class Deck(object):
     def __init__(self):
@@ -30,8 +32,9 @@ class Deck(object):
             r = random.randint(0, i)
             self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
 
-    def dealCard(self):
+    def deal_card(self):
         return self.cards.pop()
+
 
 class Player(object):
     def __init__(self, name, score):
@@ -40,16 +43,17 @@ class Player(object):
         self.secondhand = []
         self.score = score
 
-    def showName(self):
+    def show_name(self):
         print("Player: {}\nScore: {}".format(self.name, self.score))
 
     def draw(self, deck):
-        self.hand.append(deck.dealCard())
+        self.hand.append(deck.deal_card())
         return self
 
-    def showHand(self):
+    def show_hand(self):
         for card in self.hand:
             card.show()
+
 
 class Dealer(object):
     def __init__(self, name, score):
@@ -58,16 +62,17 @@ class Dealer(object):
         self.secondhand = []
         self.score = score
 
-    def showName(self):
+    def show_name(self):
         print("Dealer: {}\nScore: {}".format(self.name, self.score))
 
     def draw(self, deck):
-        self.hand.append(deck.dealCard())
+        self.hand.append(deck.deal_card())
         return self
 
-    def showHand(self):
+    def show_hand(self):
         for card in self.hand:
             card.show()
+
 
 class Blackjack(object):
     def __init__(self):
@@ -75,7 +80,7 @@ class Blackjack(object):
         self.round = []
 
     def hit(self):
-        return self.draw()
+        return self
 
     def stand(self):
         return self
@@ -83,38 +88,41 @@ class Blackjack(object):
     def double(self):
         return self
 
-    def cardDict(self):
+    def card_dict(self):
         return self
 
     def score(self):
         return self
 
-    def scoreCompare(self):
+    def score_compare(self):
         return self
 
     def bet(self):
         return self
 
 
-
-
-
-
-deck = Deck()
-deck.shuffle()
-# deck.show()
-
 dealer = Dealer("Michele", 0)
 player = Player("Paul", 0)
-player.draw(deck).draw(deck)
-player.showHand()
-player.showName()
-dealer.draw(deck).draw(deck)
-dealer.showHand()
-dealer.showName()
+
+deck_temp = Deck()
+deck_temp.shuffle()
+deck_temp.show()
+print('Deck Length: ', len(deck_temp.cards))
+print("\n")
+
+player.draw(deck_temp).draw(deck_temp)
+player.show_name()
+player.show_hand()
+print("\n")
+
+dealer.draw(deck_temp).draw(deck_temp)
+dealer.show_name()
+dealer.show_hand()
+
+print("\n")
+deck_temp.show()
 
 blackjack = Blackjack()
 
-blackjack(player)
-player.showHand()
+print('Deck Length: ', len(deck_temp.cards))
 
